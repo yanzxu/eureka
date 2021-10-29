@@ -1,0 +1,51 @@
+
+spring:
+  application:
+    name: eureka
+  security:
+    user:
+      name: root
+      password: root
+---
+spring:
+  profiles:
+    active: 7901
+server:
+  port: 7903
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://root:root@eureka-7901:7901/eureka/, http://root:root@eureka-7902:7902/eureka/
+#  server:
+#    #关闭自我保护
+#    enable-self-preservation: false
+#    #清理间隔时间
+#    eviction-interval-timer-in-ms: 5000
+  instance:
+    hostname: eureka-7901
+
+---
+spring:
+  profiles:
+    active: 7902
+server:
+  port: 7902
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://root:root@eureka-7901:7901/eureka/, http://root:root@eureka-7902:7902/eureka/
+  server:
+    #关闭自我保护
+    enable-self-preservation: false
+    #清理间隔时间
+    eviction-interval-timer-in-ms: 5000
+  instance:
+    hostname: eureka-7902
+---
+
